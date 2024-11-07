@@ -173,32 +173,45 @@ pkg/translator/skywalking/                        @open-telemetry/collector-cont
 pkg/translator/zipkin/                            @open-telemetry/collector-contrib-approvers @MovieStoreGuy @andrzej-stencel @crobert-1
 pkg/winperfcounters/                              @open-telemetry/collector-contrib-approvers @dashpole @Mrod1598 @alxbl @pjanotti
 
-processor/attributesprocessor/                    @open-telemetry/collector-contrib-approvers @boostchicken
-processor/coralogixprocessor/                     @open-telemetry/collector-contrib-approvers @crobert-1 @galrose
-processor/cumulativetodeltaprocessor/             @open-telemetry/collector-contrib-approvers @TylerHelmuth
-processor/deltatocumulativeprocessor/             @open-telemetry/collector-contrib-approvers @sh0rez @RichieSams
-processor/deltatorateprocessor/                   @open-telemetry/collector-contrib-approvers @Aneurysm9
-processor/filterprocessor/                        @open-telemetry/collector-contrib-approvers @TylerHelmuth @boostchicken
-processor/geoipprocessor/                         @open-telemetry/collector-contrib-approvers @andrzej-stencel @michalpristas @rogercoll
-processor/groupbyattrsprocessor/                  @open-telemetry/collector-contrib-approvers @rnishtala-sumo
-processor/groupbytraceprocessor/                  @open-telemetry/collector-contrib-approvers @jpkrohling
-processor/intervalprocessor/                      @open-telemetry/collector-contrib-approvers @RichieSams @sh0rez
-processor/k8sattributesprocessor/                 @open-telemetry/collector-contrib-approvers @dmitryax @fatsheep9146 @TylerHelmuth
-processor/logdedupprocessor/                      @open-telemetry/collector-contrib-approvers @MikeGoldsmith @djaglowski
-processor/logstransformprocessor/                 @open-telemetry/collector-contrib-approvers @dehaansa
-processor/metricsgenerationprocessor/             @open-telemetry/collector-contrib-approvers @Aneurysm9
-processor/metricstransformprocessor/              @open-telemetry/collector-contrib-approvers @dmitryax
-processor/probabilisticsamplerprocessor/          @open-telemetry/collector-contrib-approvers @jpkrohling @jmacd
-processor/redactionprocessor/                     @open-telemetry/collector-contrib-approvers @dmitryax @mx-psi @TylerHelmuth
-processor/remotetapprocessor/                     @open-telemetry/collector-contrib-approvers @atoulme @jaronoff97
-processor/resourcedetectionprocessor/             @open-telemetry/collector-contrib-approvers @Aneurysm9 @dashpole
-processor/resourceprocessor/                      @open-telemetry/collector-contrib-approvers @dmitryax
-processor/routingprocessor/                       @open-telemetry/collector-contrib-approvers @jpkrohling
-processor/schemaprocessor/                        @open-telemetry/collector-contrib-approvers @MovieStoreGuy
-processor/spanprocessor/                          @open-telemetry/collector-contrib-approvers @boostchicken
-processor/sumologicprocessor/                     @open-telemetry/collector-contrib-approvers @rnishtala-sumo @chan-tim-sumo
-processor/tailsamplingprocessor/                  @open-telemetry/collector-contrib-approvers @jpkrohling
-processor/transformprocessor/                     @open-telemetry/collector-contrib-approvers @TylerHelmuth @kentquirk @bogdandrutu @evan-bradley
+processor/attributesprocessor/                                      @open-telemetry/collector-contrib-approvers @boostchicken
+processor/awsapplicationsignalsprocessor/                           @open-telemetry/collector-contrib-approvers @mxiamxia @jj22ee
+processor/cumulativetodeltaprocessor/                               @open-telemetry/collector-contrib-approvers @TylerHelmuth
+processor/deltatocumulativeprocessor/                               @open-telemetry/collector-contrib-approvers @sh0rez @RichieSams @jpkrohling
+processor/deltatorateprocessor/                                     @open-telemetry/collector-contrib-approvers @Aneurysm9
+processor/filterprocessor/                                          @open-telemetry/collector-contrib-approvers @TylerHelmuth @boostchicken
+processor/geoipprocessor/                                           @open-telemetry/collector-contrib-approvers @andrzej-stencel @michalpristas @rogercoll
+processor/groupbyattrsprocessor/                                    @open-telemetry/collector-contrib-approvers @rnishtala-sumo
+processor/groupbytraceprocessor/                                    @open-telemetry/collector-contrib-approvers @jpkrohling
+processor/intervalprocessor/                                        @open-telemetry/collector-contrib-approvers @RichieSams @sh0rez @djaglowski
+processor/k8sattributesprocessor/                                   @open-telemetry/collector-contrib-approvers @dmitryax @rmfitzpatrick @fatsheep9146 @TylerHelmuth
+processor/logstransformprocessor/                                   @open-telemetry/collector-contrib-approvers @djaglowski @dehaansa
+processor/metricsgenerationprocessor/                               @open-telemetry/collector-contrib-approvers @Aneurysm9
+processor/metricstransformprocessor/                                @open-telemetry/collector-contrib-approvers @dmitryax
+processor/probabilisticsamplerprocessor/                            @open-telemetry/collector-contrib-approvers @jpkrohling @jmacd
+processor/redactionprocessor/                                       @open-telemetry/collector-contrib-approvers @dmitryax @mx-psi @TylerHelmuth
+processor/remotetapprocessor/                                       @open-telemetry/collector-contrib-approvers @atoulme
+processor/resourcedetectionprocessor/                               @open-telemetry/collector-contrib-approvers @Aneurysm9 @dashpole
+processor/resourcedetectionprocessor/internal/aws/ec2/              @open-telemetry/collector-contrib-approvers
+processor/resourcedetectionprocessor/internal/aws/ecs/              @open-telemetry/collector-contrib-approvers
+processor/resourcedetectionprocessor/internal/aws/eks/              @open-telemetry/collector-contrib-approvers
+processor/resourcedetectionprocessor/internal/aws/elasticbeanstalk/ @open-telemetry/collector-contrib-approvers
+processor/resourcedetectionprocessor/internal/aws/lambda/           @open-telemetry/collector-contrib-approvers
+processor/resourcedetectionprocessor/internal/azure/                @open-telemetry/collector-contrib-approvers @mx-psi
+processor/resourcedetectionprocessor/internal/azure/aks/            @open-telemetry/collector-contrib-approvers
+processor/resourcedetectionprocessor/internal/consul/               @open-telemetry/collector-contrib-approvers
+processor/resourcedetectionprocessor/internal/docker/               @open-telemetry/collector-contrib-approvers
+processor/resourcedetectionprocessor/internal/gcp/                  @open-telemetry/collector-contrib-approvers
+processor/resourcedetectionprocessor/internal/heroku/               @open-telemetry/collector-contrib-approvers @atoulme
+processor/resourcedetectionprocessor/internal/k8snode/              @open-telemetry/collector-contrib-approvers
+processor/resourcedetectionprocessor/internal/openshift/            @open-telemetry/collector-contrib-approvers @frzifus
+processor/resourcedetectionprocessor/internal/system/               @open-telemetry/collector-contrib-approvers
+processor/resourceprocessor/                                        @open-telemetry/collector-contrib-approvers @dmitryax
+processor/routingprocessor/                                         @open-telemetry/collector-contrib-approvers @jpkrohling
+processor/schemaprocessor/                                          @open-telemetry/collector-contrib-approvers @MovieStoreGuy
+processor/spanprocessor/                                            @open-telemetry/collector-contrib-approvers @boostchicken
+processor/sumologicprocessor/                                       @open-telemetry/collector-contrib-approvers @aboguszewski-sumo @kkujawa-sumo @mat-rumian @rnishtala-sumo @sumo-drosiek @swiatekm-sumo
+processor/tailsamplingprocessor/                                    @open-telemetry/collector-contrib-approvers @jpkrohling
+processor/transformprocessor/                                       @open-telemetry/collector-contrib-approvers @TylerHelmuth @kentquirk @bogdandrutu @evan-bradley
 
 receiver/activedirectorydsreceiver/               @open-telemetry/collector-contrib-approvers @pjanotti
 receiver/aerospikereceiver/                       @open-telemetry/collector-contrib-approvers @antonblock
