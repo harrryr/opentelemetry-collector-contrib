@@ -3,10 +3,9 @@ module github.com/open-telemetry/opentelemetry-collector-contrib/receiver/awscon
 go 1.22.0
 
 require (
-	github.com/Microsoft/hcsshim v0.12.8
-	github.com/amazon-contributing/opentelemetry-collector-contrib/extension/awsmiddleware v0.0.0-20240419190856-2f880467f335
-	github.com/amazon-contributing/opentelemetry-collector-contrib/override/aws v0.0.0-00010101000000-000000000000
-	github.com/aws/aws-sdk-go v1.55.5
+	github.com/Microsoft/hcsshim v0.12.0-rc.3
+	github.com/amazon-contributing/opentelemetry-collector-contrib/override/aws v0.0.0-20241107200025-113eee2da3ff
+	github.com/aws/aws-sdk-go v1.53.11
 	github.com/go-kit/log v0.2.1
 	github.com/google/cadvisor v0.49.1-0.20240628164550-89f779d86055
 	github.com/open-telemetry/opentelemetry-collector-contrib/internal/aws/awsutil v0.115.0

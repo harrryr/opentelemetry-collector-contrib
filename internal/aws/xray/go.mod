@@ -3,11 +3,11 @@ module github.com/open-telemetry/opentelemetry-collector-contrib/internal/aws/xr
 go 1.22.0
 
 require (
-	github.com/amazon-contributing/opentelemetry-collector-contrib/override/aws v0.0.0-00010101000000-000000000000
-	github.com/aws/aws-sdk-go v1.55.5
-	github.com/open-telemetry/opentelemetry-collector-contrib/internal/aws/awsutil v0.115.0
-	github.com/stretchr/testify v1.10.0
-	go.opentelemetry.io/collector/component v0.115.0
+	github.com/amazon-contributing/opentelemetry-collector-contrib/override/aws v0.0.0-20241107200025-113eee2da3ff
+	github.com/aws/aws-sdk-go v1.53.11
+	github.com/open-telemetry/opentelemetry-collector-contrib/internal/aws/awsutil v0.103.0
+	github.com/stretchr/testify v1.9.0
+	go.opentelemetry.io/collector/component v0.103.0
 	go.uber.org/goleak v1.3.0
 	go.uber.org/zap v1.27.0
 )
