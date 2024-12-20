@@ -60,21 +60,21 @@ func TestLogEventBatch_timestampWithin24Hours(t *testing.T) {
 		minTimestampMs: minDate.UnixNano() / 1e6,
 	}
 
-	// less than the minDate
+	// less than the min
 	target := minDate.Add(-1 * time.Hour)
 	assert.True(t, logEventBatch.isActive(aws.Int64(target.UnixNano()/1e6)))
 
 	target = target.Add(-1 * time.Millisecond)
 	assert.False(t, logEventBatch.isActive(aws.Int64(target.UnixNano()/1e6)))
 
-	// more than the maxDate
+	// more than the max
 	target = maxDate.Add(1 * time.Hour)
 	assert.True(t, logEventBatch.isActive(aws.Int64(target.UnixNano()/1e6)))
 
 	target = target.Add(1 * time.Millisecond)
 	assert.False(t, logEventBatch.isActive(aws.Int64(target.UnixNano()/1e6)))
 
-	// in between minDate and maxDate
+	// in between min and max
 	target = minDate.Add(2 * time.Hour)
 	assert.True(t, logEventBatch.isActive(aws.Int64(target.UnixNano()/1e6)))
 }

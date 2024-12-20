@@ -31,9 +31,9 @@ type Staleness[T any] struct {
 	pq    PriorityQueue
 }
 
-func NewStaleness[T any](max time.Duration, items streams.Map[T]) *Staleness[T] {
+func NewStaleness[T any](maxDuration time.Duration, items streams.Map[T]) *Staleness[T] {
 	return &Staleness[T]{
-		Max: max,
+		Max: maxDuration,
 
 		items: items,
 		pq:    NewPriorityQueue(),
@@ -101,4 +101,34 @@ func (s *Staleness[T]) Evict() (identity.Stream, bool) {
 
 func (s *Staleness[T]) Clear() {
 	s.items.Clear()
+}
+
+type Tracker struct {
+	pq PriorityQueue
+}
+
+func NewTracker() Tracker {
+	return Tracker{pq: NewPriorityQueue()}
+}
+
+func (stale Tracker) Refresh(ts time.Time, ids ...identity.Stream) {
+	for _, id := range ids {
+		stale.pq.Update(id, ts)
+	}
+}
+
+func (stale Tracker) Collect(maxDuration time.Duration) []identity.Stream {
+	now := NowFunc()
+
+	var ids []identity.Stream
+	for stale.pq.Len() > 0 {
+		_, ts := stale.pq.Peek()
+		if now.Sub(ts) < maxDuration {
+			break
+		}
+		id, _ := stale.pq.Pop()
+		ids = append(ids, id)
+	}
+
+	return ids
 }
