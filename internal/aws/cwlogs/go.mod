@@ -2,8 +2,6 @@ module github.com/open-telemetry/opentelemetry-collector-contrib/internal/aws/cw
 
 go 1.23.0
 
-toolchain go1.24.1
-
 require (
 	github.com/aws/aws-sdk-go v1.53.11
 	github.com/stretchr/testify v1.10.0

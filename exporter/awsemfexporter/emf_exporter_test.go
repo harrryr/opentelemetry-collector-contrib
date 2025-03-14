@@ -25,6 +25,11 @@ import (
 
 const defaultRetryCount = 1
 
+func init() {
+	os.Setenv("AWS_ACCESS_KEY_ID", "test")
+	os.Setenv("AWS_SECRET_ACCESS_KEY", "test")
+}
+
 type mockPusher struct {
 	mock.Mock
 }
