@@ -2,8 +2,6 @@ module github.com/amazon-contributing/opentelemetry-collector-contrib/processor/
 
 go 1.23.0
 
-toolchain go1.24.1
-
 require (
 	github.com/deckarep/golang-set/v2 v2.6.0
 	github.com/gobwas/glob v0.2.3
