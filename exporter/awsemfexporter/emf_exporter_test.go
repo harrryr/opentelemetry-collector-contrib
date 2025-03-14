@@ -6,6 +6,7 @@ package awsemfexporter
 import (
 	"context"
 	"errors"
+	"os"
 	"testing"
 
 	"github.com/aws/aws-sdk-go/aws/awserr"
