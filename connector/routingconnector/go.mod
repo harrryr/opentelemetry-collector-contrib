@@ -1,6 +1,6 @@
 module github.com/open-telemetry/opentelemetry-collector-contrib/connector/routingconnector
 
-go 1.22.5
+go 1.23.0
 
 require (
 	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/ottl v0.103.0

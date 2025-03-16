@@ -1,6 +1,6 @@
 module github.com/open-telemetry/opentelemetry-collector-contrib/internal/tools
 
-go 1.22.5
+go 1.23.0
 
 require (
 	github.com/Khan/genqlient v0.7.0

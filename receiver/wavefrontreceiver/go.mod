@@ -1,6 +1,6 @@
 module github.com/open-telemetry/opentelemetry-collector-contrib/receiver/wavefrontreceiver
 
-go 1.22.4
+go 1.23.0
 
 toolchain go1.22.5
 

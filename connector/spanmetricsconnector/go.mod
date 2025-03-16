@@ -1,6 +1,6 @@
 module github.com/open-telemetry/opentelemetry-collector-contrib/connector/spanmetricsconnector
 
-go 1.22.5
+go 1.23.0
 
 require (
 	github.com/hashicorp/golang-lru v1.0.2

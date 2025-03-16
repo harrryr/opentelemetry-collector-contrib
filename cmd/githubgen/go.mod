@@ -1,6 +1,6 @@
 module github.com/open-telemetry/opentelemetry-collector-contrib/cmd/githubgen
 
-go 1.22.5
+go 1.23.0
 
 require (
 	github.com/google/go-github/v62 v62.0.0

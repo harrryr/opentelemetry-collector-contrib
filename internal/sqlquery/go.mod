@@ -1,6 +1,6 @@
 module github.com/open-telemetry/opentelemetry-collector-contrib/internal/sqlquery
 
-go 1.22.4
+go 1.23.0
 
 require (
 	github.com/SAP/go-hdb v1.9.8
