@@ -72,15 +72,15 @@ jobs:
           # - receiver-1
           # - receiver-2
           # - receiver-3
-          # - processor-0
-          # - processor-1
+          - processor-0
+          - processor-1
           # - exporter-0
           # - exporter-1
           # - exporter-2
           # - exporter-3
           # - extension
           # - connector
-          - internal
+          # - internal
           # - pkg
           # - cmd-0
           # - cmd-1
