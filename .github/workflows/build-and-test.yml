@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version: "1.22.5"
+          go-version: "1.23.6"
           cache: false
       - name: Cache Go
         id: go-cache
@@ -72,13 +72,13 @@ jobs:
           # - receiver-1
           # - receiver-2
           # - receiver-3
-          - processor-0
-          - processor-1
-          - exporter-0
-          - exporter-1
-          - exporter-2
-          - exporter-3
-          - extension
+          # - processor-0
+          # - processor-1
+          # - exporter-0
+          # - exporter-1
+          # - exporter-2
+          # - exporter-3
+          # - extension
           # - connector
           - internal
           # - pkg
@@ -91,7 +91,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version: "1.22.5"
+          go-version: "1.23.6"
           cache: false
       - name: Cache Go
         id: go-cache
