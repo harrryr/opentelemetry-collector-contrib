@@ -13,7 +13,7 @@ import (
 
 type aggGroups struct {
 	gauge        map[string]pmetric.NumberDataPointSlice
-	sum          map[string]pmetric.NumberDataPointSlice
+	aggGroupSum          map[string]pmetric.NumberDataPointSlice
 	histogram    map[string]pmetric.HistogramDataPointSlice
 	expHistogram map[string]pmetric.ExponentialHistogramDataPointSlice
 }
@@ -47,11 +47,11 @@ func groupDataPoints(metric pmetric.Metric, ag aggGroups) aggGroups {
 		}
 		groupNumberDataPoints(metric.Gauge().DataPoints(), false, ag.gauge)
 	case pmetric.MetricTypeSum:
-		if ag.sum == nil {
-			ag.sum = map[string]pmetric.NumberDataPointSlice{}
+		if ag.aggGroupSum  == nil {
+			ag.aggGroupSum  = map[string]pmetric.NumberDataPointSlice{}
 		}
 		groupByStartTime := metric.Sum().AggregationTemporality() == pmetric.AggregationTemporalityDelta
-		groupNumberDataPoints(metric.Sum().DataPoints(), groupByStartTime, ag.sum)
+		groupNumberDataPoints(metric.Sum().DataPoints(), groupByStartTime, ag.aggGroupSum )
 	case pmetric.MetricTypeHistogram:
 		if ag.histogram == nil {
 			ag.histogram = map[string]pmetric.HistogramDataPointSlice{}
@@ -73,7 +73,7 @@ func mergeDataPoints(to pmetric.Metric, aggType aggregationType, ag aggGroups) {
 	case pmetric.MetricTypeGauge:
 		mergeNumberDataPoints(ag.gauge, aggType, to.Gauge().DataPoints())
 	case pmetric.MetricTypeSum:
-		mergeNumberDataPoints(ag.sum, aggType, to.Sum().DataPoints())
+		mergeNumberDataPoints(ag.aggGroupSum , aggType, to.Sum().DataPoints())
 	case pmetric.MetricTypeHistogram:
 		mergeHistogramDataPoints(ag.histogram, to.Histogram().DataPoints())
 	case pmetric.MetricTypeExponentialHistogram:
@@ -161,13 +161,13 @@ func mergeNumberDataPoints(dpsMap map[string]pmetric.NumberDataPointSlice, agg a
 		case pmetric.NumberDataPointValueTypeDouble:
 			for i := 1; i < dps.Len(); i++ {
 				switch agg {
-				case sum, mean:
+				case aggregation_sum, mean:
 					dp.SetDoubleValue(dp.DoubleValue() + doubleVal(dps.At(i)))
-				case max:
+				case aggregation_max:
 					dp.SetDoubleValue(math.Max(dp.DoubleValue(), doubleVal(dps.At(i))))
-				case min:
+				case aggregation_min:
 					dp.SetDoubleValue(math.Min(dp.DoubleValue(), doubleVal(dps.At(i))))
-				case count:
+				case aggregation_count:
 					dp.SetDoubleValue(float64(dps.Len()))
 				}
 				if dps.At(i).StartTimestamp() < dp.StartTimestamp() {
@@ -180,24 +180,24 @@ func mergeNumberDataPoints(dpsMap map[string]pmetric.NumberDataPointSlice, agg a
 		case pmetric.NumberDataPointValueTypeInt:
 			for i := 1; i < dps.Len(); i++ {
 				switch agg {
-				case sum, mean:
+				case aggregation_sum, aggregation_mean:
 					dp.SetIntValue(dp.IntValue() + dps.At(i).IntValue())
-				case max:
+				case aggregation_max:
 					if dp.IntValue() < intVal(dps.At(i)) {
 						dp.SetIntValue(intVal(dps.At(i)))
 					}
-				case min:
+				case aggregation_min:
 					if dp.IntValue() > intVal(dps.At(i)) {
 						dp.SetIntValue(intVal(dps.At(i)))
 					}
-				case count:
+				case aggregation_count:
 					dp.SetIntValue(int64(dps.Len()))
 				}
 				if dps.At(i).StartTimestamp() < dp.StartTimestamp() {
 					dp.SetStartTimestamp(dps.At(i).StartTimestamp())
 				}
 			}
-			if agg == mean {
+			if agg == aggregation_mean {
 				dp.SetIntValue(dp.IntValue() / int64(dps.Len()))
 			}
 		}
