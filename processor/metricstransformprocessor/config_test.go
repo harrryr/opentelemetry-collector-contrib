@@ -97,12 +97,12 @@ func TestLoadConfig(t *testing.T) {
 							{
 								Action:          "aggregate_labels",
 								LabelSet:        []string{"new_label1", "label2"},
-								AggregationType: "aggretion_sum",
+								AggregationType: "aggregation_sum",
 							},
 							{
 								Action:           "aggregate_label_values",
 								Label:            "new_label1",
-								AggregationType:  "aggretion_sum",
+								AggregationType:  "aggregation_sum",
 								AggregatedValues: []string{"value1", "value2"},
 								NewValue:         "new_value",
 							},

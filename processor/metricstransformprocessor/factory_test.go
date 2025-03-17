@@ -221,14 +221,14 @@ func TestCreateProcessorsFilledData(t *testing.T) {
 				{
 					Action:          aggregateLabels,
 					LabelSet:        []string{"label1", "label2"},
-					AggregationType: aggretion_sum,
+					AggregationType: aggregation_sum,
 				},
 				{
 					Action:           aggregateLabelValues,
 					Label:            "label",
 					AggregatedValues: []string{"value1", "value2"},
 					NewValue:         "new-value",
-					AggregationType:  aggretion_sum,
+					AggregationType:  aggregation_sum,
 				},
 			},
 		},
@@ -265,7 +265,7 @@ func TestCreateProcessorsFilledData(t *testing.T) {
 					configOperation: Operation{
 						Action:          aggregateLabels,
 						LabelSet:        []string{"label1", "label2"},
-						AggregationType: aggretion_sum,
+						AggregationType: aggregation_sum,
 					},
 					labelSetMap: map[string]bool{
 						"label1": true,
@@ -278,7 +278,7 @@ func TestCreateProcessorsFilledData(t *testing.T) {
 						Label:            "label",
 						AggregatedValues: []string{"value1", "value2"},
 						NewValue:         "new-value",
-						AggregationType:  aggretion_sum,
+						AggregationType:  aggregation_sum,
 					},
 					aggregatedValuesSet: map[string]bool{
 						"value1": true,

@@ -49,12 +49,12 @@ func TestTransformToDbModelSpan(tester *testing.T) {
 	}
 	newSpan, err := transformToLogzioSpanBytes(&span)
 	if err != nil {
-		tester.Fatalf(err.Error())
+		tester.Fatalf("unexpected error: %v", err)
 	}
 	var testLogzioSpan logzioSpan
 	err = json.Unmarshal(newSpan, &testLogzioSpan)
 	if err != nil {
-		tester.Fatalf(err.Error())
+		tester.Fatalf("unexpected error: %v", err)
 	}
 	dbModelSpan := testLogzioSpan.transformToDbModelSpan()
 	if len(dbModelSpan.References) != 3 {

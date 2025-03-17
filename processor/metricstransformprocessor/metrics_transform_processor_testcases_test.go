@@ -223,7 +223,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: aggretion_sum,
+								AggregationType: aggregation_sum,
 								LabelSet:        []string{"label1"},
 							},
 							labelSetMap: map[string]bool{"label1": true},
@@ -251,7 +251,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: aggretion_mean,
+								AggregationType: aggregation_mean,
 								LabelSet:        []string{"label1"},
 							},
 							labelSetMap: map[string]bool{"label1": true},
@@ -279,7 +279,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: aggretion_max,
+								AggregationType: aggregation_max,
 								LabelSet:        []string{"label1"},
 							},
 							labelSetMap: map[string]bool{"label1": true},
@@ -308,7 +308,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: count,
+								AggregationType: aggregation_count,
 								LabelSet:        []string{"label1"},
 							},
 							labelSetMap: map[string]bool{"label1": true},
@@ -337,7 +337,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: min,
+								AggregationType: aggregation_min,
 								LabelSet:        []string{"label1"},
 							},
 							labelSetMap: map[string]bool{"label1": true},
@@ -366,7 +366,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: sum,
+								AggregationType: aggregation_sum,
 								LabelSet:        []string{"label1"},
 							},
 							labelSetMap: map[string]bool{"label1": true},
@@ -394,7 +394,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: mean,
+								AggregationType: aggregation_mean,
 								LabelSet:        []string{"label1"},
 							},
 							labelSetMap: map[string]bool{"label1": true},
@@ -422,7 +422,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: max,
+								AggregationType: aggregation_max,
 								LabelSet:        []string{"label1"},
 							},
 							labelSetMap: map[string]bool{"label1": true},
@@ -450,7 +450,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: count,
+								AggregationType: aggregation_count,
 								LabelSet:        []string{"label1"},
 							},
 							labelSetMap: map[string]bool{"label1": true},
@@ -478,7 +478,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: min,
+								AggregationType: aggregation_min,
 								LabelSet:        []string{"label1"},
 							},
 							labelSetMap: map[string]bool{"label1": true},
@@ -512,7 +512,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: sum,
+								AggregationType: aggregation_sum,
 								LabelSet:        []string{"label1", "label2"},
 							},
 							labelSetMap: map[string]bool{"label1": true, "label2": true},
@@ -548,7 +548,7 @@ var (
 							configOperation: Operation{
 								Action:          aggregateLabelValues,
 								NewValue:        "new/label2-value",
-								AggregationType: sum,
+								AggregationType: aggregation_sum,
 								Label:           "label2",
 							},
 							aggregatedValuesSet: map[string]bool{"label2-value1": true, "label2-value2": true},
@@ -583,7 +583,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: sum,
+								AggregationType: aggregation_sum,
 								LabelSet:        []string{"label1"},
 							},
 							labelSetMap: map[string]bool{"label1": true},
@@ -619,7 +619,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: sum,
+								AggregationType: aggregation_sum,
 								LabelSet:        []string{"label1"},
 							},
 							labelSetMap: map[string]bool{"label1": true},
@@ -650,7 +650,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: mean,
+								AggregationType: aggregation_mean,
 								LabelSet:        []string{"label1"},
 							},
 							labelSetMap: map[string]bool{"label1": true},
@@ -1009,7 +1009,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: sum,
+								AggregationType: aggregation_sum,
 								LabelSet:        []string{"label1"},
 							},
 							labelSetMap: map[string]bool{"label1": true},
@@ -1041,7 +1041,7 @@ var (
 							configOperation: Operation{
 								Action:          aggregateLabelValues,
 								NewValue:        "new/label2-value",
-								AggregationType: sum,
+								AggregationType: aggregation_sum,
 								Label:           "label2",
 							},
 							aggregatedValuesSet: map[string]bool{"label2-value1": true, "label2-value2": true},
@@ -1072,7 +1072,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: sum,
+								AggregationType: aggregation_sum,
 								LabelSet:        []string{"label1"},
 							},
 							labelSetMap: map[string]bool{"label1": true},
@@ -1168,7 +1168,7 @@ var (
 					MetricIncludeFilter: internalFilterRegexp{include: regexp.MustCompile("^metric[12]$")},
 					Action:              Combine,
 					NewName:             "new",
-					AggregationType:     sum,
+					AggregationType:     aggregation_sum,
 				},
 			},
 			in: []pmetric.Metric{
@@ -1199,7 +1199,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: sum,
+								AggregationType: aggregation_sum,
 								LabelSet:        []string{"$1", "new_label"},
 							},
 							labelSetMap: map[string]bool{"$1": true, "new_label": true},
@@ -1244,7 +1244,7 @@ var (
 					MetricIncludeFilter: internalFilterRegexp{include: regexp.MustCompile("^metric[12]$")},
 					Action:              Combine,
 					NewName:             "new",
-					AggregationType:     sum,
+					AggregationType:     aggregation_sum,
 				},
 			},
 			in: []pmetric.Metric{
@@ -1265,7 +1265,7 @@ var (
 					MetricIncludeFilter: internalFilterRegexp{include: regexp.MustCompile("^metric[12]$")},
 					Action:              Combine,
 					NewName:             "new",
-					AggregationType:     sum,
+					AggregationType:     aggregation_sum,
 				},
 			},
 			in: []pmetric.Metric{
@@ -1286,7 +1286,7 @@ var (
 					MetricIncludeFilter: internalFilterRegexp{include: regexp.MustCompile("^metric[12]$")},
 					Action:              Combine,
 					NewName:             "new",
-					AggregationType:     sum,
+					AggregationType:     aggregation_sum,
 				},
 			},
 			in: []pmetric.Metric{
@@ -1309,7 +1309,7 @@ var (
 					MetricIncludeFilter: internalFilterRegexp{include: regexp.MustCompile("^metric[12]$")},
 					Action:              Combine,
 					NewName:             "new",
-					AggregationType:     sum,
+					AggregationType:     aggregation_sum,
 				},
 			},
 			in: []pmetric.Metric{

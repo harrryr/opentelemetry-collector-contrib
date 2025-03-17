@@ -541,7 +541,7 @@ func TestGRPCArrowReceiverAuth(t *testing.T) {
 		map[component.ID]component.Component{
 			authID: newTestAuthExtension(t, func(ctx context.Context, _ map[string][]string) (context.Context, error) {
 				if ctx.Value(inStreamCtx{}) != nil {
-					return ctx, fmt.Errorf(errorString)
+					return ctx, fmt.Errorf("%s", errorString)
 				}
 				return context.WithValue(ctx, inStreamCtx{}, t), nil
 			}),
