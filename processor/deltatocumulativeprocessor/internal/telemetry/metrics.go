@@ -92,9 +92,9 @@ func metrics(meter metric.Meter) Metrics {
 	}
 }
 
-func (tel Telemetry) WithLimit(max int64) {
+func (tel Telemetry) WithLimit(maxLimit int64) {
 	then := metric.Callback(func(_ context.Context, o metric.Observer) error {
-		o.ObserveInt64(tel.streams.limit, max)
+		o.ObserveInt64(tel.streams.limit, maxLimit)
 		return nil
 	})
 	_, err := tel.meter.RegisterCallback(then, tel.streams.limit)
@@ -103,9 +103,9 @@ func (tel Telemetry) WithLimit(max int64) {
 	}
 }
 
-func (tel Telemetry) WithStale(max time.Duration) {
+func (tel Telemetry) WithStale(maxTime time.Duration) {
 	then := metric.Callback(func(_ context.Context, o metric.Observer) error {
-		o.ObserveInt64(tel.streams.stale, int64(max.Seconds()))
+		o.ObserveInt64(tel.streams.stale, int64(maxTime.Seconds()))
 		return nil
 	})
 	_, err := tel.meter.RegisterCallback(then, tel.streams.stale)

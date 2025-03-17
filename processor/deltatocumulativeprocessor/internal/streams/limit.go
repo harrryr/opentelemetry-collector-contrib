@@ -11,9 +11,9 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/internal/exp/metrics/streams"
 )
 
-func Limit[T any](m Map[T], max int) LimitMap[T] {
+func Limit[T any](m Map[T], maxLimit int) LimitMap[T] {
 	return LimitMap[T]{
-		Map: m, Max: max,
+		Map: m, Max: maxLimit,
 		Evictor: EvictorFunc(func() (identity.Stream, bool) {
 			return identity.Stream{}, false
 		}),
