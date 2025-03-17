@@ -25,12 +25,12 @@ func TestTransformToLogzioSpanBytes(tester *testing.T) {
 	}
 	newSpan, err := transformToLogzioSpanBytes(&span)
 	if err != nil {
-		tester.Fatalf(err)
+		tester.Fatalf(err.Error())
 	}
 	m := make(map[string]any)
 	err = json.Unmarshal(newSpan, &m)
 	if err != nil {
-		tester.Fatalf(err)
+		tester.Fatalf(err.Error())
 	}
 	if _, ok := m["JaegerTag"]; !ok {
 		tester.Error("error converting span to logzioSpan, JaegerTag is not found")
@@ -49,12 +49,12 @@ func TestTransformToDbModelSpan(tester *testing.T) {
 	}
 	newSpan, err := transformToLogzioSpanBytes(&span)
 	if err != nil {
-		tester.Fatalf(err)
+		tester.Fatalf(err.Error())
 	}
 	var testLogzioSpan logzioSpan
 	err = json.Unmarshal(newSpan, &testLogzioSpan)
 	if err != nil {
-		tester.Fatalf(err)
+		tester.Fatalf(err.Error())
 	}
 	dbModelSpan := testLogzioSpan.transformToDbModelSpan()
 	if len(dbModelSpan.References) != 3 {
