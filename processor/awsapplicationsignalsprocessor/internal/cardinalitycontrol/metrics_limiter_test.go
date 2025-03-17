@@ -18,8 +18,10 @@ import (
 	"go.uber.org/zap"
 )
 
-var emptyResourceAttributes = pcommon.NewMap()
-var logger, _ = zap.NewDevelopment()
+var (
+	emptyResourceAttributes = pcommon.NewMap()
+	logger, _               = zap.NewDevelopment()
+)
 
 func TestAdmitAndRollup(t *testing.T) {
 	config := &awsapplicationsignalsconfig.LimiterConfig{
@@ -56,7 +58,7 @@ func TestAdmitAndRollup(t *testing.T) {
 			}
 		}
 	}
-	assert.Equal(t, 2, len(admittedAttributes), fmt.Sprintf("admitted attributes are %v", admittedAttributes))
+	assert.Len(t, admittedAttributes, 2, "admitted attributes are %v", admittedAttributes)
 }
 
 func TestAdmitByTopK(t *testing.T) {
@@ -165,7 +167,7 @@ func TestClearStaleService(t *testing.T) {
 	metricsLimiter := limiter.(*MetricsLimiter)
 
 	metricsLimiter.mapLock.RLock()
-	assert.Equal(t, 0, len(metricsLimiter.services))
+	assert.Empty(t, metricsLimiter.services)
 	metricsLimiter.mapLock.RUnlock()
 }
 

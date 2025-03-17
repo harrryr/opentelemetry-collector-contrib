@@ -56,7 +56,6 @@ func initECSUtilSingleton() (newInstance *EcsUtil) {
 	}
 	log.Println("I! attempt to access ECS task metadata to determine whether I'm running in ECS.")
 	ecsMetadataResponse, err := newInstance.getECSMetadata()
-
 	if err != nil {
 		log.Printf("I! access ECS task metadata fail with response %v, assuming I'm not running in ECS.\n", err)
 		return
@@ -66,7 +65,6 @@ func initECSUtilSingleton() (newInstance *EcsUtil) {
 	newInstance.parseClusterName(ecsMetadataResponse)
 	newInstance.TaskARN = ecsMetadataResponse.TaskARN
 	return
-
 }
 
 func (e *EcsUtil) IsECS() bool {
@@ -88,7 +86,6 @@ func (e *EcsUtil) getECSMetadata() (em *ecsMetadataResponse, err error) {
 func (e *EcsUtil) getMetadataResponse(endpoint string) (em *ecsMetadataResponse, err error) {
 	em = &ecsMetadataResponse{}
 	resp, err := e.httpClient.Request(endpoint)
-
 	if err != nil {
 		return
 	}

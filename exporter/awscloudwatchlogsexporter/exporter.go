@@ -23,11 +23,12 @@ import (
 	"go.opentelemetry.io/collector/pdata/plog"
 	"go.uber.org/zap"
 
-	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/awscloudwatchlogsexporter/internal/metadata"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/internal/aws/awsutil"
+	// "github.com/open-telemetry/opentelemetry-collector-contrib/exporter/awscloudwatchlogsexporter/internal/metadata"
+	// "github.com/open-telemetry/opentelemetry-collector-contrib/internal/aws/awsutil"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/internal/aws/cwlogs"
 )
 
+// nolint:unused
 type cwlExporter struct {
 	Config           *Config
 	logger           *zap.Logger
@@ -54,14 +55,14 @@ func newCwLogsPusher(expConfig *Config, params exp.Settings) (*cwlExporter, erro
 		return nil, errors.New("awscloudwatchlogs exporter config is nil")
 	}
 
-	// create AWS session
-	awsConfig, session, err := awsutil.GetAWSConfigSession(params.Logger, &awsutil.Conn{}, &expConfig.AWSSessionSettings)
-	if err != nil {
-		return nil, err
-	}
+	// // create AWS session
+	// awsConfig, session, err := awsutil.GetAWSConfigSession(params.Logger, &awsutil.Conn{}, &expConfig.AWSSessionSettings)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
 	// create CWLogs client with aws session config
-	svcStructuredLog := cwlogs.NewClient(params.Logger, awsConfig, params.BuildInfo, expConfig.LogGroupName, expConfig.LogRetention, expConfig.Tags, session, metadata.Type.String())
+	// svcStructuredLog := cwlogs.NewClient(params.Logger, awsConfig, params.BuildInfo, expConfig.LogGroupName, expConfig.LogRetention, expConfig.Tags, session, metadata.Type.String())
 	collectorIdentifier, err := uuid.NewRandom()
 	if err != nil {
 		return nil, err

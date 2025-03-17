@@ -11,8 +11,7 @@ import (
 	"go.opentelemetry.io/collector/pdata/pcommon"
 )
 
-type MetricPruner struct {
-}
+type MetricPruner struct{}
 
 func (p *MetricPruner) ShouldBeDropped(attributes pcommon.Map) (bool, error) {
 	for _, attributeKey := range common.CWMetricAttributes {

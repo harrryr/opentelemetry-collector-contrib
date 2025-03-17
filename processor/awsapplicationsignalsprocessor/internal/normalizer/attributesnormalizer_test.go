@@ -117,15 +117,15 @@ func TestTruncateAttributes(t *testing.T) {
 	truncateAttributesByLength(attributes)
 
 	val, _ := attributes.Get(attr.AWSLocalEnvironment)
-	assert.True(t, len(val.Str()) == maxEnvironmentLength)
+	assert.Len(t, val.Str(), maxEnvironmentLength)
 	val, _ = attributes.Get(attr.AWSRemoteEnvironment)
-	assert.True(t, len(val.Str()) == maxEnvironmentLength)
+	assert.Len(t, val.Str(), maxEnvironmentLength)
 	val, _ = attributes.Get(attr.AWSLocalService)
-	assert.True(t, len(val.Str()) == maxServiceNameLength)
+	assert.Len(t, val.Str(), maxServiceNameLength)
 	val, _ = attributes.Get(attr.AWSRemoteService)
-	assert.True(t, len(val.Str()) == maxServiceNameLength)
+	assert.Len(t, val.Str(), maxServiceNameLength)
 	val, _ = attributes.Get(attr.AWSRemoteResourceIdentifier)
-	assert.True(t, len(val.Str()) == 300)
+	assert.Len(t, val.Str(), 300)
 }
 
 func Test_attributesNormalizer_appendNewAttributes(t *testing.T) {
@@ -154,7 +154,8 @@ func Test_attributesNormalizer_appendNewAttributes(t *testing.T) {
 			completeResourceAttributes,
 			true,
 			"",
-		}, {
+		},
+		{
 			"testAppendAttributesToMetricWithValuesFound",
 			pcommon.NewMap(),
 			completeResourceAttributes,
@@ -169,7 +170,6 @@ func Test_attributesNormalizer_appendNewAttributes(t *testing.T) {
 			"opentelemetry,0.0.1test,-,Manual",
 		},
 		{
-
 			"testAppendAttributesToMetricWithAllValuesMissing",
 			pcommon.NewMap(),
 			pcommon.NewMap(),
@@ -230,7 +230,7 @@ func TestTruncateAttributes_AWSRemoteDbUser(t *testing.T) {
 	truncateAttributesByLength(attributes)
 
 	val, _ := attributes.Get(attr.AWSRemoteDbUser)
-	assert.True(t, len(val.Str()) <= defaultMetricAttributeLength)
+	assert.LessOrEqual(t, len(val.Str()), defaultMetricAttributeLength)
 }
 
 func TestRenameAttributes_AWSRemoteResourceCfnIdentifier_for_metric(t *testing.T) {

@@ -20,11 +20,13 @@ func TestMetricPrunerWithIndexableAttribute(t *testing.T) {
 			"testShouldDropChineseChar",
 			"漢",
 			true,
-		}, {
+		},
+		{
 			"testShouldDropSymbolChar",
 			"€, £, µ",
 			true,
-		}, {
+		},
+		{
 			"testShouldDropAllBlackSpace",
 			"   ",
 			true,
@@ -33,7 +35,8 @@ func TestMetricPrunerWithIndexableAttribute(t *testing.T) {
 			"testShouldDropAllTab",
 			"		",
 			true,
-		}, {
+		},
+		{
 			"testShouldKeepEnglishWord",
 			"abcdefg-",
 			false,

@@ -108,7 +108,7 @@ func generateActionDetails(rules []Rule, action AllowListAction) []ActionItem {
 	var actionItems []ActionItem
 	for _, rule := range rules {
 		if rule.Action == action {
-			var selectorMatchers = generateSelectorMatchers(rule.Selectors)
+			selectorMatchers := generateSelectorMatchers(rule.Selectors)
 			actionItem := ActionItem{
 				selectorMatchers,
 				rule.Replacements,

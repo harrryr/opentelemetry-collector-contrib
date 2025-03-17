@@ -102,6 +102,7 @@ func newResourceAttributesResolver(defaultEnvPrefix, platformType string, attrib
 		attributeMap:     attributeMap,
 	}
 }
+
 func (h *resourceAttributesResolver) Process(attributes, resourceAttributes pcommon.Map) error {
 	for attrKey, mappingKey := range h.attributeMap {
 		if val, ok := resourceAttributes.Get(attrKey); ok {

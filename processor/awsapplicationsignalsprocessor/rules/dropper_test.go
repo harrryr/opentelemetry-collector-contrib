@@ -83,7 +83,7 @@ func TestDropperProcessor(t *testing.T) {
 	}
 
 	testDropper := NewDropper(config)
-	assert.Equal(t, 2, len(testDropper.Actions))
+	assert.Len(t, testDropper.Actions, 2)
 
 	testCases := []TestCaseForDropper{
 		{

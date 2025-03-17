@@ -5,7 +5,6 @@ package resolver
 
 import (
 	"context"
-	"fmt"
 	"strings"
 	"sync"
 	"testing"
@@ -919,7 +918,7 @@ func TestK8sResourceAttributesResolverOnEKS(t *testing.T) {
 			assert.NoError(t, err)
 
 			for key, val := range tt.expectedAttributes {
-				assert.Equal(t, val, getStrAttr(attributes, key, t), fmt.Sprintf("expected %s for key %s", val, key))
+				assert.Equalf(t, val, getStrAttr(attributes, key, t), "expected %s for key %s", val, key)
 			}
 
 			if val, ok := resourceAttributes.Get(attr.ResourceDetectionClusterName); ok && val.Str() != "" {
@@ -936,13 +935,13 @@ func TestGetResourceDetectorClusterName(t *testing.T) {
 
 	resourceDetectorAttributes := pcommon.NewMap()
 	resourceDetectorClusterName := resolver.getResourceDetectorClusterName(resourceDetectorAttributes)
-	assert.Equal(t, resourceDetectorClusterName, "test-cluster")
+	assert.Equal(t, "test-cluster", resourceDetectorClusterName)
 	resourceDetectorAttributes.PutStr(attr.ResourceDetectionClusterName, "DetectedClusterName")
 	resourceDetectorClusterName = resolver.getResourceDetectorClusterName(resourceDetectorAttributes)
-	assert.Equal(t, resourceDetectorClusterName, "DetectedClusterName")
+	assert.Equal(t, "DetectedClusterName", resourceDetectorClusterName)
 	resourceDetectorAttributes.PutStr(attr.ResourceDetectionClusterName, "")
 	resourceDetectorClusterName = resolver.getResourceDetectorClusterName(resourceDetectorAttributes)
-	assert.Equal(t, resourceDetectorClusterName, "test-cluster")
+	assert.Equal(t, "test-cluster", resourceDetectorClusterName)
 }
 
 func TestK8sResourceAttributesResolverOnK8S(t *testing.T) {
@@ -1013,7 +1012,7 @@ func TestK8sResourceAttributesResolverOnK8S(t *testing.T) {
 			assert.NoError(t, err)
 
 			for key, val := range tt.expectedAttributes {
-				assert.Equal(t, val, getStrAttr(attributes, key, t), fmt.Sprintf("expected %s for key %s", val, key))
+				assert.Equal(t, val, getStrAttr(attributes, key, t), "expected %s for key %s", val, key)
 			}
 			assert.Equal(t, "/aws/containerinsights/test-cluster/application", getStrAttr(resourceAttributes, semconv.AttributeAWSLogGroupNames, t))
 		})
@@ -1082,7 +1081,7 @@ func TestK8sResourceAttributesResolverOnK8SOnPrem(t *testing.T) {
 			assert.NoError(t, err)
 
 			for key, val := range tt.expectedAttributes {
-				assert.Equal(t, val, getStrAttr(attributes, key, t), fmt.Sprintf("expected %s for key %s", val, key))
+				assert.Equal(t, val, getStrAttr(attributes, key, t), "expected %s for key %s", val, key)
 			}
 			assert.Equal(t, "/aws/containerinsights/test-cluster/application", getStrAttr(resourceAttributes, semconv.AttributeAWSLogGroupNames, t))
 
@@ -1135,7 +1134,7 @@ func TestFilterPodIPFields(t *testing.T) {
 		Status: corev1.PodStatus{},
 	}
 	newPod, err := minimizePod(pod)
-	assert.Nil(t, err)
+	assert.NoError(t, err)
 	assert.Empty(t, getHostNetworkPorts(newPod.(*corev1.Pod)))
 
 	podStatus := corev1.PodStatus{
@@ -1161,7 +1160,7 @@ func TestFilterPodIPFields(t *testing.T) {
 		Status: podStatus,
 	}
 	newPod, err = minimizePod(pod)
-	assert.Nil(t, err)
+	assert.NoError(t, err)
 	assert.Equal(t, "app", newPod.(*corev1.Pod).Labels["name"])
 	assert.Equal(t, []string{"8080"}, getHostNetworkPorts(newPod.(*corev1.Pod)))
 	assert.Equal(t, podStatus, newPod.(*corev1.Pod).Status)
@@ -1181,7 +1180,7 @@ func TestFilterPodIPFields(t *testing.T) {
 		Status: podStatus,
 	}
 	newPod, err = minimizePod(pod)
-	assert.Nil(t, err)
+	assert.NoError(t, err)
 	assert.Equal(t, []string{"8080", "8081"}, getHostNetworkPorts(newPod.(*corev1.Pod)))
 	assert.Equal(t, podStatus, newPod.(*corev1.Pod).Status)
 }
@@ -1201,7 +1200,7 @@ func TestFilterServiceIPFields(t *testing.T) {
 		},
 	}
 	newSvc, err := minimizeService(svc)
-	assert.Nil(t, err)
+	assert.NoError(t, err)
 	assert.Equal(t, "10.0.12.4", newSvc.(*corev1.Service).Spec.ClusterIP)
 	assert.Equal(t, "app", newSvc.(*corev1.Service).Spec.Selector["name"])
 }

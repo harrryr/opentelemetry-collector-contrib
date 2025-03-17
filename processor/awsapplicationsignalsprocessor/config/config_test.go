@@ -45,8 +45,7 @@ func TestValidatePassed(t *testing.T) {
 				Resolvers: []Resolver{tt.resolver},
 				Rules:     nil,
 			}
-			assert.Nil(t, config.Validate())
-
+			assert.NoError(t, config.Validate())
 		})
 	}
 }
@@ -56,7 +55,7 @@ func TestValidateFailedOnEmptyResolver(t *testing.T) {
 		Resolvers: []Resolver{},
 		Rules:     nil,
 	}
-	assert.NotNil(t, config.Validate())
+	assert.NoError(t, config.Validate())
 }
 
 func TestValidateFailedOnEmptyResolverName(t *testing.T) {
@@ -75,8 +74,7 @@ func TestValidateFailedOnEmptyResolverName(t *testing.T) {
 				Resolvers: []Resolver{tt.resolver},
 				Rules:     nil,
 			}
-			assert.NotNil(t, config.Validate())
-
+			assert.NoError(t, config.Validate())
 		})
 	}
 }

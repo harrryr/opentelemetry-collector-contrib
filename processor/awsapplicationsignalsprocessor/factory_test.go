@@ -106,7 +106,7 @@ func TestLoadEKSConfig(t *testing.T) {
 			assert.Equal(t, tt.expected, cfg)
 
 			validateErr := cfg.Validate()
-			assert.Nil(t, validateErr, validateErr)
+			assert.NoError(t, validateErr)
 		})
 	}
 }
@@ -149,7 +149,7 @@ func TestLoadGenericConfig(t *testing.T) {
 			assert.Equal(t, tt.expected, cfg)
 
 			validateErr := cfg.Validate()
-			assert.Nil(t, validateErr, validateErr)
+			assert.NoError(t, validateErr)
 		})
 	}
 }

@@ -265,7 +265,6 @@ func (p *podWatcher) run(stopCh chan struct{}) {
 	})
 
 	go p.informer.Run(stopCh)
-
 }
 
 func (p *podWatcher) waitForCacheSync(stopCh chan struct{}) {

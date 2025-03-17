@@ -18,7 +18,6 @@ type TestCaseForReplacer struct {
 }
 
 func TestReplacerProcess(t *testing.T) {
-
 	config := []Rule{
 		{
 			Selectors: []Selector{
@@ -72,7 +71,7 @@ func TestReplacerProcess(t *testing.T) {
 	}
 
 	testReplacer := NewReplacer(config, false)
-	assert.Equal(t, 1, len(testReplacer.Actions))
+	assert.Len(t, testReplacer.Actions, 1)
 
 	testCases := []TestCaseForReplacer{
 		{
@@ -143,7 +142,7 @@ func TestAddManagedDimensionKey(t *testing.T) {
 	}
 
 	testReplacer := NewReplacer(config, false)
-	assert.Equal(t, 1, len(testReplacer.Actions))
+	assert.Len(t, testReplacer.Actions, 1)
 
 	testCases := []TestCaseForReplacer{
 		{
@@ -191,7 +190,6 @@ func TestAddManagedDimensionKey(t *testing.T) {
 }
 
 func TestReplacerProcessWithPriority(t *testing.T) {
-
 	config := []Rule{
 		{
 			Selectors: []Selector{
@@ -288,7 +286,6 @@ func TestReplacerProcessWithPriority(t *testing.T) {
 }
 
 func TestReplacerProcessWithNilConfig(t *testing.T) {
-
 	testReplacer := NewReplacer(nil, false)
 	testMapPlaceHolder := pcommon.NewMap()
 
@@ -320,7 +317,6 @@ func TestReplacerProcessWithNilConfig(t *testing.T) {
 }
 
 func TestReplacerProcessWithEmptyConfig(t *testing.T) {
-
 	config := []Rule{}
 
 	testReplacer := NewReplacer(config, false)

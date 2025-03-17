@@ -10,13 +10,15 @@ import (
 )
 
 func generateTestAttributes(service string, operation string, remoteService string, remoteOperation string,
-	isTrace bool) pcommon.Map {
+	isTrace bool,
+) pcommon.Map {
 	return generateAttributesWithEnv(service, operation, "", remoteService, remoteOperation, "", isTrace)
 }
 
 func generateAttributesWithEnv(service string, operation string, environment string,
 	remoteService string, remoteOperation string, remoteEnvironment string,
-	isTrace bool) pcommon.Map {
+	isTrace bool,
+) pcommon.Map {
 	attributes := pcommon.NewMap()
 	if isTrace {
 		attributes.PutStr(attr.AWSLocalService, service)

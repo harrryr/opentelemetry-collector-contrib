@@ -161,7 +161,6 @@ func (m *MetricsLimiter) removeStaleServices() {
 	defer m.mapLock.Unlock()
 
 	for name, svc := range m.services {
-
 		svc.rwLock.Lock()
 		defer svc.rwLock.Unlock()
 

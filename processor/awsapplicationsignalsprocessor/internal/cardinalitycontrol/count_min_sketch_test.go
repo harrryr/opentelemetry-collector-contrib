@@ -54,7 +54,6 @@ func TestWriteMultipleEntries(t *testing.T) {
 				} else {
 					metricDataArray[i].frequency += freq
 				}
-
 			}
 		}
 
@@ -73,7 +72,7 @@ func TestWriteMultipleEntries(t *testing.T) {
 	}
 
 	// revisit the count min sketch setting if the assertion fails.
-	assert.True(t, maxCollisionRate < 30)
+	assert.Less(t, maxCollisionRate, 30)
 }
 
 func TestAdjustUnsupportedDepth(t *testing.T) {

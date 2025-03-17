@@ -70,7 +70,7 @@ func TestKeeperProcessor(t *testing.T) {
 	}
 
 	testKeeper := NewKeeper(config, false)
-	assert.Equal(t, 1, len(testKeeper.Actions))
+	assert.Len(t, testKeeper.Actions, 1)
 
 	isTrace := false
 
@@ -138,7 +138,6 @@ func TestKeeperProcessorWithNilConfig(t *testing.T) {
 }
 
 func TestKeeperProcessorWithEmptyConfig(t *testing.T) {
-
 	config := []Rule{}
 
 	testKeeper := NewKeeper(config, false)
