@@ -25,12 +25,12 @@ func TestTransformToLogzioSpanBytes(tester *testing.T) {
 	}
 	newSpan, err := transformToLogzioSpanBytes(&span)
 	if err != nil {
-		tester.Fatalf(err.Error())
+		tester.Fatalf("%v", err)
 	}
 	m := make(map[string]any)
 	err = json.Unmarshal(newSpan, &m)
 	if err != nil {
-		tester.Fatalf(err.Error())
+		tester.Fatalf("%v", err.Error())
 	}
 	if _, ok := m["JaegerTag"]; !ok {
 		tester.Error("error converting span to logzioSpan, JaegerTag is not found")

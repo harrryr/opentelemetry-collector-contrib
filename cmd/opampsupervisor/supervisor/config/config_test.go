@@ -340,8 +340,6 @@ agent:
 					Agent: Agent{
 						Executable:              executablePath,
 						OrphanDetectionInterval: DefaultSupervisor().Agent.OrphanDetectionInterval,
-						ConfigApplyTimeout:      DefaultSupervisor().Agent.ConfigApplyTimeout,
-						BootstrapTimeout:        DefaultSupervisor().Agent.BootstrapTimeout,
 					},
 					Telemetry: DefaultSupervisor().Telemetry,
 				}

@@ -236,7 +236,7 @@ const (
 	aggregation_count aggregationType = "aggregation_count"
 )
 
-var aggregationTypes = []aggregationType{sum, mean, min, max, count}
+var aggregationTypes = []aggregationType{aggregation_sum, aggregation_mean, aggregation_min, aggregation_max, aggregation_count}
 
 func (at aggregationType) isValid() bool {
 	for _, aggregationType := range aggregationTypes {
