@@ -223,7 +223,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: sum,
+								AggregationType: aggretion_sum,
 								LabelSet:        []string{"label1"},
 							},
 							labelSetMap: map[string]bool{"label1": true},
@@ -251,7 +251,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: mean,
+								AggregationType: aggretion_mean,
 								LabelSet:        []string{"label1"},
 							},
 							labelSetMap: map[string]bool{"label1": true},
@@ -279,7 +279,7 @@ var (
 						{
 							configOperation: Operation{
 								Action:          aggregateLabels,
-								AggregationType: max,
+								AggregationType: aggretion_max,
 								LabelSet:        []string{"label1"},
 							},
 							labelSetMap: map[string]bool{"label1": true},

@@ -221,19 +221,19 @@ type aggregationType string
 
 const (
 	// sum indicates taking the sum of the aggregated data.
-	sum aggregationType = "sum"
+	sum aggregationType = "aggretion_sum"
 
 	// mean indicates taking the mean of the aggregated data.
-	mean aggregationType = "mean"
+	mean aggregationType = "aggretion_mean"
 
 	// min indicates taking the minimum of the aggregated data.
-	min aggregationType = "min"
+	min aggregationType = "aggretion_min"
 
 	// max indicates taking the max of the aggregated data.
-	max aggregationType = "max"
+	max aggregationType = "aggretion_max"
 
 	// count indicates taking the count of the aggregated data.
-	count aggregationType = "count"
+	count aggregationType = "aggretion_count"
 )
 
 var aggregationTypes = []aggregationType{sum, mean, min, max, count}
