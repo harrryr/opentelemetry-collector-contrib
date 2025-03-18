@@ -32,7 +32,7 @@ RECEIVER_MODS_1 := $(shell find ./receiver/[g-o]* $(FIND_MOD_ARGS) -exec $(TO_MO
 RECEIVER_MODS_2 := $(shell find ./receiver/[p]* $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) ) # Prometheus is special and gets its own section.
 RECEIVER_MODS_3 := $(shell find ./receiver/[q-z]* $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) )
 RECEIVER_MODS := $(RECEIVER_MODS_0) $(RECEIVER_MODS_1) $(RECEIVER_MODS_2) $(RECEIVER_MODS_3)
-PROCESSOR_MODS_0 := $(shell find ./processor/awsapplicationsignalsprocessor $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) )
+PROCESSOR_MODS_0 := $(shell find ./processor/[a-o]* $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) )
 PROCESSOR_MODS_1 := $(shell find ./processor/[p-z]* $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) )
 PROCESSOR_MODS := $(PROCESSOR_MODS_0) $(PROCESSOR_MODS_1)
 EXPORTER_MODS_0 := $(shell find ./exporter/[a-m]* $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) )
@@ -57,6 +57,13 @@ ALL_MODS := $(RECEIVER_MODS) $(PROCESSOR_MODS) $(EXPORTER_MODS) $(EXTENSION_MODS
 FIND_INTEGRATION_TEST_MODS={ find . -type f -name "*integration_test.go" & find . -type f -name "*e2e_test.go" -not -path "./testbed/*"; }
 INTEGRATION_MODS := $(shell $(FIND_INTEGRATION_TEST_MODS) | xargs $(TO_MOD_DIR) | uniq)
 
+AWS_APPLICATION_SIGNALS_PROCESSOR_MOD := $(shell find ./processor/awsapplicationsignalsprocessor $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) )
+AWS_EMF_EXPORTER_MOD := $(shell find ./exporter/awsemfexporter $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) )
+AWS_CW_LOGS_MOD := $(shell find ./internal/aws/cwlogs $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) )
+AWS_UTIL_MOD := $(shell find ./internal/aws/awsutil $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) )
+
+
+
 ifeq ($(GOOS),windows)
 	EXTENSION := .exe
 endif
@@ -67,6 +74,10 @@ all-modules:
 	@echo $(NONROOT_MODS) | tr ' ' '\n' | sort
 
 all-groups:
+	@echo "awsapplicationsignalsprocessor: $(AWS_APPLICATION_SIGNALS_PROCESSOR_MOD)"
+	@echo "awsemfexporter: $(AWS_EMF_EXPORTER_MOD)"
+	@echo "awscwlogs: $(AWS_CW_LOGS_MOD)"
+	@echo "awsutil: $(AWS_UTIL_MOD)"
 	@echo "receiver-0: $(RECEIVER_MODS_0)"
 	@echo "\nreceiver-1: $(RECEIVER_MODS_1)"
 	@echo "\nreceiver-2: $(RECEIVER_MODS_2)"
