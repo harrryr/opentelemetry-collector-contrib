@@ -1,0 +1,88 @@
+name: Update OCB Collector Dependencies
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  check_version:
+    runs-on: ubuntu-latest
+    outputs:
+      upstream_version: ${{ steps.get_upstream_version.outputs.upstream_version }}
+      update_needed: ${{ steps.compare_versions.outputs.update_needed }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Get Latest OpenTelemetry Collector Contrib Version
+        id: get_upstream_version
+        run: |
+          UPSTREAM_VERSION=$(curl -s https://api.github.com/repos/open-telemetry/opentelemetry-collector-contrib/releases/latest | jq -r '.tag_name')
+          echo "Upstream Version: $UPSTREAM_VERSION"
+          echo "upstream_version=$UPSTREAM_VERSION" >> $GITHUB_ENV
+          echo "upstream_version=$UPSTREAM_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Read Current Version from versions.yaml
+        id: get_current_version
+        run: |
+          CURRENT_VERSION=$(yq e '.module-sets.contrib-base.version' versions.yaml)
+          echo "Current Version in versions.yaml: $CURRENT_VERSION"
+          echo "current_version=$CURRENT_VERSION" >> $GITHUB_ENV
+
+      - name: Compare Versions
+        id: compare_versions
+        run: |
+          if [ "$(echo -e "$current_version\n$upstream_version" | sort -V | head -n 1)" != "$upstream_version" ]; then
+            echo "Newer version available: $upstream_version"
+            echo "update_needed=true" >> $GITHUB_ENV
+            echo "update_needed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No update needed."
+            echo "update_needed=false" >> $GITHUB_ENV
+            echo "update_needed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  update_dependencies:
+    runs-on: ubuntu-latest
+    needs: check_version
+    if: needs.check_version.outputs.update_needed == 'true'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Download upstream go.mod
+        run: |
+          curl -s https://raw.githubusercontent.com/open-telemetry/opentelemetry-collector-contrib/${{ needs.check_version.outputs.upstream_version }}/internal/aws/cwlogs/go.mod -o upstream_cwlogs_go.mod
+          curl -s https://raw.githubusercontent.com/open-telemetry/opentelemetry-collector-contrib/${{ needs.check_version.outputs.upstream_version }}/internal/aws/awsutil/go.mod -o upstream_awsutil_go.mod
+          curl -s https://raw.githubusercontent.com/open-telemetry/opentelemetry-collector-contrib/${{ needs.check_version.outputs.upstream_version }}/exporter/awsemfexporter/go.mod -o upstream_awsemfexporter_go.mod
+
+      - name: Update local go.mod OTel dependencies with upstream 
+        run: |
+          ./.github/workflows/scripts/update-ocb-collector-dependency.sh ./internal/aws/cwlogs/go.mod ./upstream_cwlogs_go.mod
+          ./.github/workflows/scripts/update-ocb-collector-dependency.sh ./internal/aws/awsutil/go.mod ./upstream_awsutil_go.mod
+          ./.github/workflows/scripts/update-ocb-collector-dependency.sh ./exporter/awsemfexporter/go.mod ./upstream_awsemfexporter_go.mod
+
+      - name: Commit and Push Changes
+        run: |
+          git status
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git checkout -b aws-ocb-dev-${{ needs.check_version.outputs.upstream_version }}-test
+          git add .
+          git commit -m "Prepare ${{ needs.check_version.outputs.upstream_version }} release"
+          git push -u origin aws-ocb-dev-${{ needs.check_version.outputs.upstream_version }}-test
+
+      - name: Open Pull Request
+        id: create_pr
+        run: |
+          PR_URL=$(gh pr create --title "Update OTel to ${{ env.UPSTREAM_VERSION }}" \
+              --body "This PR prepares for ${{ needs.check_version.outputs.upstream_version }} release" \
+              --head "aws-ocb-dev-${{ needs.check_version.outputs.upstream_version }}-test" \
+              --base aws-ocb-dev)
+          echo "PR_URL=$PR_URL" >> $GITHUB_ENV
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+
+        
