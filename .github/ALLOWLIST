@@ -21,6 +21,7 @@
 ## COMMON & SHARED components
 internal/common
 config/confighttp
+cmd/checkapi/
 
 ## DEPRECATED components
 

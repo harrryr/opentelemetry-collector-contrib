@@ -1,6 +1,8 @@
 module github.com/open-telemetry/opentelemetry-collector-contrib/exporter/awscloudwatchlogsexporter
 
-go 1.22.5
+go 1.23.0
+
+toolchain go1.23.7
 
 require (
 	github.com/aws/aws-sdk-go v1.53.11
