@@ -4,8 +4,6 @@ module github.com/open-telemetry/opentelemetry-collector-contrib/cmd/otelcontrib
 
 go 1.23.0
 
-toolchain go1.23.7
-
 require (
 	github.com/amazon-contributing/opentelemetry-collector-contrib/processor/awsapplicationsignalsprocessor v0.103.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/confmap/provider/s3provider v0.103.0

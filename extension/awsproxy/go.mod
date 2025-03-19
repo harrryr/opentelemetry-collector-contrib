@@ -2,8 +2,6 @@ module github.com/open-telemetry/opentelemetry-collector-contrib/extension/awspr
 
 go 1.23.0
 
-toolchain go1.23.7
-
 require (
 	github.com/open-telemetry/opentelemetry-collector-contrib/internal/aws/proxy v0.103.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/internal/common v0.103.0

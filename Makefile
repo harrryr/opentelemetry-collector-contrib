@@ -52,7 +52,6 @@ CMD_MODS_1 := $(shell find ./cmd/[n-z]* $(FIND_MOD_ARGS) -not -path "./cmd/otelc
 CMD_MODS := $(CMD_MODS_0) $(CMD_MODS_1)
 OVERRIDE_MODS := $(shell find ./override/* $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) )
 OTHER_MODS := $(shell find . $(EX_COMPONENTS) $(EX_INTERNAL) $(EX_PKG) $(EX_CMD) $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) ) $(PWD)
-OCB_COLLECTOR_MODS := $(shell find ./processor/awsapplicationsignalsprocessor ./exporter/awsemfexporter ./internal/aws/cwlogs ./internal/aws/awsutil $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) \;)
 ALL_MODS := $(RECEIVER_MODS) $(PROCESSOR_MODS) $(EXPORTER_MODS) $(EXTENSION_MODS) $(CONNECTOR_MODS) $(INTERNAL_MODS) $(PKG_MODS) $(CMD_MODS) $(OTHER_MODS)
 
 FIND_INTEGRATION_TEST_MODS={ find . -type f -name "*integration_test.go" & find . -type f -name "*e2e_test.go" -not -path "./testbed/*"; }
@@ -89,8 +88,6 @@ all-groups:
 	@echo "\ncmd: $(CMD_MODS)"
 	@echo "\noverride: $(OVERRIDE_MODS)"
 	@echo "\nother: $(OTHER_MODS)"
-	@echo "\nocbcollector: $(OCB_COLLECTOR_MODS)"
-
 
 .PHONY: all
 all: install-tools all-common goporto multimod-verify gotest otelcontribcol
@@ -254,9 +251,6 @@ for-override-target: $(OVERRIDE_MODS)
 
 .PHONY: for-other-target
 for-other-target: $(OTHER_MODS)
-
-.PHONY: for-ocb-collector-target
-for-ocb-collector-target: $(OCB_COLLECTOR_MODS)
 
 .PHONY: for-integration-target
 for-integration-target: $(INTEGRATION_MODS)

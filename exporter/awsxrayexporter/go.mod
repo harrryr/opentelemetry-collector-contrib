@@ -2,8 +2,6 @@ module github.com/open-telemetry/opentelemetry-collector-contrib/exporter/awsxra
 
 go 1.23.0
 
-toolchain go1.23.7
-
 require (
 	github.com/amazon-contributing/opentelemetry-collector-contrib/extension/awsmiddleware v0.0.0-20240419190856-2f880467f335
 	github.com/aws/aws-sdk-go v1.53.11

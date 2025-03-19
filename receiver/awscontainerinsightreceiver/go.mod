@@ -2,8 +2,6 @@ module github.com/open-telemetry/opentelemetry-collector-contrib/receiver/awscon
 
 go 1.23.0
 
-toolchain go1.23.7
-
 require (
 	github.com/Microsoft/hcsshim v0.12.0-rc.3
 	github.com/amazon-contributing/opentelemetry-collector-contrib/override/aws v0.0.0-20241107200025-113eee2da3ff
