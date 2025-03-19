@@ -74,10 +74,10 @@ all-modules:
 	@echo $(NONROOT_MODS) | tr ' ' '\n' | sort
 
 all-groups:
-	@echo "awsapplicationsignalsprocessor: $(AWS_APPLICATION_SIGNALS_PROCESSOR_MOD)"
-	@echo "awsemfexporter: $(AWS_EMF_EXPORTER_MOD)"
-	@echo "awscwlogs: $(AWS_CW_LOGS_MOD)"
-	@echo "awsutil: $(AWS_UTIL_MOD)"
+	@echo "\nawsapplicationsignalsprocessor: $(AWS_APPLICATION_SIGNALS_PROCESSOR_MOD)"
+	@echo "\nawsemfexporter: $(AWS_EMF_EXPORTER_MOD)"
+	@echo "\nawscwlogs: $(AWS_CW_LOGS_MOD)"
+	@echo "\nawsutil: $(AWS_UTIL_MOD)"
 	@echo "receiver-0: $(RECEIVER_MODS_0)"
 	@echo "\nreceiver-1: $(RECEIVER_MODS_1)"
 	@echo "\nreceiver-2: $(RECEIVER_MODS_2)"
