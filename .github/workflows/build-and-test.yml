@@ -42,14 +42,13 @@ jobs:
       - name: Install Tools
         if: steps.go-cache.outputs.cache-hit != 'true'
         run: make install-tools
-  # We only maintain certain modules for OCB collector, this check will fail since other module versions will become outdated due to not being maintained
-  # check-collector-module-version:
-  #   runs-on: ubuntu-latest
-  #   needs: [setup-environment]
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Check Collector Module Version
-  #       run: ./.github/workflows/scripts/check-collector-module-version.sh
+  check-collector-module-version:
+    runs-on: ubuntu-latest
+    needs: [setup-environment]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Collector Module Version
+        run: ./.github/workflows/scripts/check-collector-module-version.sh
   check-codeowners:
     runs-on: ubuntu-latest
     needs: [setup-environment]
@@ -302,22 +301,8 @@ jobs:
       fail-fast: false
       matrix:
         group:
-          # - receiver-0
-          # - receiver-1
-          # - receiver-2
-          # - receiver-3
           - ocb-collector
-          # - processor-1
-          # - exporter-0
-          # - exporter-1
-          # - exporter-2
-          # - exporter-3
-          # - extension
-          # - connector
-          # - internal
-          # - pkg
-          # - cmd-0
-          # - cmd-1
+
     runs-on: ubuntu-latest
     needs: [setup-environment]
     steps:
