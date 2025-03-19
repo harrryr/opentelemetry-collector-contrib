@@ -263,7 +263,7 @@ jobs:
           # - receiver-1
           # - receiver-2
           # - receiver-3
-          - processor-0
+          - ocb-collector
           # - processor-1
           # - exporter-0
           # - exporter-1
@@ -354,7 +354,7 @@ jobs:
           # - receiver-1
           # - receiver-2
           # - receiver-3
-          - processor-0
+          - ocb-collector
           # - processor-1
           # - exporter-0
           # - exporter-1
