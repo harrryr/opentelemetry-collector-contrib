@@ -197,6 +197,18 @@ $(ALL_MODS):
 .PHONY: for-all-target
 for-all-target: $(ALL_MODS)
 
+.PHONY: for-awsapplicationsignalsprocessor-target
+for-awsapplicationsignalsprocessor-target: $(AWS_APPLICATION_SIGNALS_PROCESSOR_MOD)
+
+.PHONY: for-awsemfexporter-target
+for-awsemfexporter-target: $(AWS_EMF_EXPORTER_MOD)
+
+.PHONY: for-awscwlogs-target
+for-awscwlogs-target: $(AWS_CW_LOGS_MOD)
+
+.PHONY: for-awsutil-target
+for-awsutil-target: $(AWS_UTIL_MOD)
+
 .PHONY: for-receiver-target
 for-receiver-target: $(RECEIVER_MODS)
 
