@@ -138,7 +138,6 @@ linters:
     - depguard
     - errcheck
     - errorlint
-    - exportloopref
     - exhaustive
     - gci
     - gocritic
