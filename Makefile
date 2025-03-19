@@ -52,17 +52,11 @@ CMD_MODS_1 := $(shell find ./cmd/[n-z]* $(FIND_MOD_ARGS) -not -path "./cmd/otelc
 CMD_MODS := $(CMD_MODS_0) $(CMD_MODS_1)
 OVERRIDE_MODS := $(shell find ./override/* $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) )
 OTHER_MODS := $(shell find . $(EX_COMPONENTS) $(EX_INTERNAL) $(EX_PKG) $(EX_CMD) $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) ) $(PWD)
+OCB_COLLECTOR_MODS := $(shell find ./processor/awsapplicationsignalsprocessor ./exporter/awsemfexporter ./internal/aws/cwlogs ./internal/aws/awsutil $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) \;)
 ALL_MODS := $(RECEIVER_MODS) $(PROCESSOR_MODS) $(EXPORTER_MODS) $(EXTENSION_MODS) $(CONNECTOR_MODS) $(INTERNAL_MODS) $(PKG_MODS) $(CMD_MODS) $(OTHER_MODS)
 
 FIND_INTEGRATION_TEST_MODS={ find . -type f -name "*integration_test.go" & find . -type f -name "*e2e_test.go" -not -path "./testbed/*"; }
 INTEGRATION_MODS := $(shell $(FIND_INTEGRATION_TEST_MODS) | xargs $(TO_MOD_DIR) | uniq)
-
-AWS_APPLICATION_SIGNALS_PROCESSOR_MOD := $(shell find ./processor/awsapplicationsignalsprocessor $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) )
-AWS_EMF_EXPORTER_MOD := $(shell find ./exporter/awsemfexporter $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) )
-AWS_CW_LOGS_MOD := $(shell find ./internal/aws/cwlogs $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) )
-AWS_UTIL_MOD := $(shell find ./internal/aws/awsutil $(FIND_MOD_ARGS) -exec $(TO_MOD_DIR) )
-
-
 
 ifeq ($(GOOS),windows)
 	EXTENSION := .exe
@@ -74,10 +68,6 @@ all-modules:
 	@echo $(NONROOT_MODS) | tr ' ' '\n' | sort
 
 all-groups:
-	@echo "\nawsapplicationsignalsprocessor: $(AWS_APPLICATION_SIGNALS_PROCESSOR_MOD)"
-	@echo "\nawsemfexporter: $(AWS_EMF_EXPORTER_MOD)"
-	@echo "\nawscwlogs: $(AWS_CW_LOGS_MOD)"
-	@echo "\nawsutil: $(AWS_UTIL_MOD)"
 	@echo "receiver-0: $(RECEIVER_MODS_0)"
 	@echo "\nreceiver-1: $(RECEIVER_MODS_1)"
 	@echo "\nreceiver-2: $(RECEIVER_MODS_2)"
@@ -99,6 +89,8 @@ all-groups:
 	@echo "\ncmd: $(CMD_MODS)"
 	@echo "\noverride: $(OVERRIDE_MODS)"
 	@echo "\nother: $(OTHER_MODS)"
+	@echo "\nocbcollector: $(OCB_COLLECTOR_MODS)"
+
 
 .PHONY: all
 all: install-tools all-common goporto multimod-verify gotest otelcontribcol
@@ -197,18 +189,6 @@ $(ALL_MODS):
 .PHONY: for-all-target
 for-all-target: $(ALL_MODS)
 
-.PHONY: for-awsapplicationsignalsprocessor-target
-for-awsapplicationsignalsprocessor-target: $(AWS_APPLICATION_SIGNALS_PROCESSOR_MOD)
-
-.PHONY: for-awsemfexporter-target
-for-awsemfexporter-target: $(AWS_EMF_EXPORTER_MOD)
-
-.PHONY: for-awscwlogs-target
-for-awscwlogs-target: $(AWS_CW_LOGS_MOD)
-
-.PHONY: for-awsutil-target
-for-awsutil-target: $(AWS_UTIL_MOD)
-
 .PHONY: for-receiver-target
 for-receiver-target: $(RECEIVER_MODS)
 
@@ -274,6 +254,9 @@ for-override-target: $(OVERRIDE_MODS)
 
 .PHONY: for-other-target
 for-other-target: $(OTHER_MODS)
+
+.PHONY: for-ocb-collector-target
+for-ocb-collector-target: $(OCB_COLLECTOR_MODS)
 
 .PHONY: for-integration-target
 for-integration-target: $(INTEGRATION_MODS)
