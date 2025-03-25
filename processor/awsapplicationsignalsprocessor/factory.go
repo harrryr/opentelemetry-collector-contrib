@@ -21,7 +21,7 @@ const (
 
 var (
 	// The value of "type" key in configuration.
-	typeStr, _           = component.NewType("awsapplicationsignalsprocessor")
+	typeStr, _           = component.NewType("awsapplicationsignals")
 	consumerCapabilities = consumer.Capabilities{MutatesData: true}
 )
 
